@@ -1,0 +1,2 @@
+C:\Users\Christian Cordts\Documents\Visual Studio 2013\Projects\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\bin\Debug\ServiceConfiguration.cscfg
+C:\Users\Christian Cordts\Documents\Visual Studio 2013\Projects\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\bin\Debug\ServiceDefinition.csdef

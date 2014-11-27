@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Registry";
+}
+
+<h2>Newsletter</h2>
+
+
+<article>
+    <b>@ViewBag.email</b> är nu ditt användarnamn!
+    <br/>
+    <h2>vad hände egentligen?</h2>
+  
+    @Html.ActionLink("Gå bakom kulissen", "RegistryDisplay", "Home", null, new { @class = "navbar-brand" }) 
+</article>

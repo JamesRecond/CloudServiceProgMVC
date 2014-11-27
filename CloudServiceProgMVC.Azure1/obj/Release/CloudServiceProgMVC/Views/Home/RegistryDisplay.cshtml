@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "RegistryDisplay";
+}
+
+<h2>RegistryDisplay</h2>
+<div class="container">
+
+    @Html.TextBox("FirstName")
+    @Html.TextBox("LastName")
+
+    <p>
+        <div class="bs-example">
+        <form role="form">
+            [HttpPost]<br/>
+            <br/>
+            public ActionResult Registry(string email)<br/>
+            {<br/>
+            ViewBag.email = email;<br/>
+            <br/>
+            var nm = NamespaceManager.CreateFromConnectionString(connectionString);<br/>
+            QueueDescription qd = new QueueDescription(qname);<br/>
+            <br />
+            qd.MaxSizeInMegabytes = 2048;<br />
+
+            qd.DefaultMessageTimeToLive = new TimeSpan(0, 5, 0);<br />
+            <br />
+            if (!nm.QueueExists(qname))<br />
+            {<br />
+            nm.CreateQueue(qd);<br />
+            }<br />
+            QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);<br />
+            <br />
+            var bm = new BrokeredMessage();<br />
+            bm.Properties["email"] = email;<br />
+            qc.Send(bm);<br />
+            user = email;<br />
+            <br />
+            return View();<br />
+            }<br />
+        </form>
+            </div>
+</p>
+</div>
+
