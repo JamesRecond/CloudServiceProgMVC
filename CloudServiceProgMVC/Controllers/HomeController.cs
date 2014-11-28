@@ -93,5 +93,10 @@ namespace CloudServiceProgMVC.Controllers
 
             return View();
         }
+
+        public ActionResult Knas()
+        {
+            return View();
+        }
     }
 }
