@@ -16,7 +16,8 @@
     });
 
     $('#UserName').hover(function() {
-        console.log(document.getElementById('knas'));
+        console.log(document.getElementById('test'));
+        document.getElementById('test').style.backgroundColor = 'green';
     });
 
 });
