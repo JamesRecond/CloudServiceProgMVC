@@ -6,13 +6,17 @@
         //alert("Get test");
         $.get("knas", function (data) {
             $("#pCodeToShow").html(data);
-            console.log(document.getElementById("pCodeToShow"));
+            
 
         });
         
         var lblUsername = document.getElementById('labelUserName');
         lblUsername.innerHTML = $('#UserName').val();
-        console.log(document.getElementById("UserName"));
             
     });
+
+    $('#UserName').hover(function() {
+        console.log(document.getElementById('knas'));
+    });
+
 });
