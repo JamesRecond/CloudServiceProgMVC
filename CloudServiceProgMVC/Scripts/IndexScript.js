@@ -9,6 +9,10 @@
             console.log(document.getElementById("pCodeToShow"));
 
         });
-
+        
+        var lblUsername = document.getElementById('labelUserName');
+        lblUsername.innerHTML = $('#UserName').val();
+        console.log(document.getElementById("UserName"));
+            
     });
 });

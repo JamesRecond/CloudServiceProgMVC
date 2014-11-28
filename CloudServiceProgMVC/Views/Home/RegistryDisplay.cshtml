@@ -8,14 +8,16 @@
 <div class="container">
     
     <div id ="divUiContainer" class="col-md-6">
-        @Html.TextBox("FirstName")
-        @Html.TextBox("LastName")
+        <input type ="text" id="UserName"/>
         <input type="submit" value="Visa vad som händer" id="btnChangeHtml" />
+        <div style="margin-left: -15px" class="col-md-6">
+            <label id="labelUserName"></label>
+        </div>
     </div>
     
     
     <div id="divCodeContainer" class="col-md-6">
-       <p id="pCodeToShow"></p>
+       <p id="pCodeToShow"></p> 
     </div>
 
 </div>
