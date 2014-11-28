@@ -1,9 +1,5 @@
 ﻿$(document).ready(function () {
     $('#btnChangeHtml').click(function () {
-        //alert("snorre");
-        //var element = document.getElementById("pCodeToShow");
-        //element.innerHTML = "poo";
-        //alert("Get test");
         $.get("knas", function (data) {
             $("#pCodeToShow").html(data);
             
@@ -12,12 +8,15 @@
         
         var lblUsername = document.getElementById('labelUserName');
         lblUsername.innerHTML = $('#UserName').val();
-            
+
+        $(this).attr('disabled', 'disabled')
     });
 
-    $('#UserName').hover(function() {
-        console.log(document.getElementById('test'));
-        document.getElementById('test').style.backgroundColor = 'green';
-    });
+    $("#UserName").hover(
+            function () {
+            document.getElementById('test').style.backgroundColor = 'green';
+            }, function () {
+            document.getElementById('test').style.backgroundColor = 'white';
+     });
 
 });
