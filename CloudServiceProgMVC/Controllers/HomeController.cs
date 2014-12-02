@@ -63,7 +63,8 @@ namespace CloudServiceProgMVC.Controllers
 
         [HttpGet]
         public ActionResult ShowDataFromTable()
-        {            
+        {    
+            
             return View();
         }
      
@@ -120,9 +121,9 @@ namespace CloudServiceProgMVC.Controllers
             return View();
         }
 
-        public ActionResult Kaos()
-        {
-            return View();
-        }
+        //public ActionResult Kaos()
+        //{
+        //    return View();
+        //}
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
+using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Table;
 
 
@@ -69,6 +70,37 @@ namespace SignupsWorker1
             Trace.TraceInformation("SignupsWorker1 has stopped");
         }
 
+        private void GetDataFromStorage()
+        {
+            try
+            {
+                StorageCredentials creds = new StorageCredentials(accountName, accountKey);
+                CloudStorageAccount account = new CloudStorageAccount(creds, useHttps: true);
+
+                CloudTableClient client = account.CreateCloudTableClient();
+                CloudTable table = client.GetTableReference("sportingproducts");
+
+                TableOperation retrieveOperation = TableOperation.Retrieve<Person>("Baseball", "BBt1032");
+
+                TableResult query = table.Execute(retrieveOperation);
+
+                if (query.Result != null)
+                {
+                    Console.WriteLine("Product: {0}", ((Person)query.Result).Email);
+                }
+                else
+                {
+                    Console.WriteLine("The Product was not found.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+
         private void SaveToStorage(string email, string password)
         {
  
@@ -107,8 +139,7 @@ namespace SignupsWorker1
         }
 
         private async Task RunAsync(CancellationToken cancellationToken)
-        {
-
+        { 
             while (true)
             {
                 Thread.Sleep(10000);
