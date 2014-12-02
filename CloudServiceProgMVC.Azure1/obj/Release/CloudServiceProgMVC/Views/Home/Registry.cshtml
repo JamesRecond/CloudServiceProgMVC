@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Web.UI.WebControls
+
 @{
     ViewBag.Title = "Registry";
 }
@@ -9,7 +10,12 @@
 <article>
     <b>@ViewBag.email</b> är nu ditt användarnamn!
     <br/>
+    <p>
+        TESTING:
+        @ViewBag.testaallskit
+    </p>
     <h2>vad hände egentligen?</h2>
-  
+    @ViewBag.userAndPassword
     @Html.ActionLink("Gå bakom kulissen", "RegistryDisplay", "Home", null, new { @class = "navbar-brand" }) 
+    @ViewBag.test
 </article>

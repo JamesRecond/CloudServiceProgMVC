@@ -14,16 +14,23 @@
 
 <div class="jumbotron">
     <h1>The front of backend</h1>
-<p class="lead">Här kommer du att få en inblick i det som sker bakom kulisserna:)</p>
+    
+    
+    <input type="button" value="Create" onclick="location.href='@Url.Action("ShowDataFromTable", "Home")'" />
+    <p class="lead">Här kommer du att få en inblick i det som sker bakom kulisserna:)</p>
     <h2>Registrera dig</h2>
     <form action="/Home/Registry" method="post">
-        @Html.TextBox("email")
-        <input type="submit" value="Singup" />
+       <h4>Email</h4> @Html.TextBox("email")
+        <br/>
+       <h4>Password</h4> @Html.TextBox("password")
+        <br/>
+        <br/>
+        <input type="submit" value="Registrera" />
 
-    </form>
+        </form>
 
-
-    @Html.ActionLink("Lär dig", "Registry", "Home", null, new { @class = "navbar-brand" })
+    <button name="btnShowTable"></button>
+    @Html.ActionLink("Visa data i Storage", "ShowDataFromTable", "Home", null, new { @class = "navbar-brand" })
 
 
 

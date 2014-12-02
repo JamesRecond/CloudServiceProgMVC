@@ -26,7 +26,7 @@
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\Christian Cordts\Documents\Visual Studio 2013\Projects\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Release\CloudServiceProgMVCContent\" />
+        <SourceDirectory path="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Release\CloudServiceProgMVCContent\" />
       </Content>
     </Contents>
   </WebRole>
@@ -37,7 +37,7 @@
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\Christian Cordts\Documents\Visual Studio 2013\Projects\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Release\SignupsWorker1Content\" />
+        <SourceDirectory path="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Release\SignupsWorker1Content\" />
       </Content>
     </Contents>
   </WorkerRole>

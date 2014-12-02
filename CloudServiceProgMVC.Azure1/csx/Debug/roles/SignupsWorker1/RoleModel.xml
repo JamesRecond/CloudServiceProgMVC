@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RoleModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SignupsWorker1" version="2.5.6496.10" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <Runtime>
+    <EntryPoint>
+      <NetFxEntryPoint assemblyName="SignupsWorker1.dll" targetFrameworkVersion="v4.0" />
+    </EntryPoint>
+  </Runtime>
+  <Properties>
+    <Property name="TargetFrameworkVersion" value="v4.5" />
+    <Property name="RoleType" value="Worker" />
+    <Property name="RoleName" value="SignupsWorker1" />
+    <Property name="ProjectName" value="SignupsWorker1" />
+    <Property name="Configuration" value="Debug" />
+    <Property name="Platform" value="AnyCPU" />
+    <Property name="RoleTargetFramework" value="v4.5" />
+    <Property name="OutputDir" value="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\obj\Debug\SignupsWorker1\" />
+    <Property name="EntryPoint" value="SignupsWorker1.dll" />
+    <Property name="SourceDir" value="" />
+    <Property name="SitePhysicalPath" value="" />
+    <Property name="TargetRuntimeVersion" value="v4.0" />
+  </Properties>
+</RoleModel>

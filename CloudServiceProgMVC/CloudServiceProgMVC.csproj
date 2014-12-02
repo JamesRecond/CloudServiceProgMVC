@@ -252,6 +252,7 @@
     <Content Include="Views\Home\RegistryDisplay.cshtml" />
     <Content Include="Views\Home\WhatHappened.cshtml" />
     <Content Include="Views\Home\Knas.cshtml" />
+    <Content Include="Views\Home\ShowDataFromTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

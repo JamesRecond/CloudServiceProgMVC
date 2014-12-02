@@ -89,11 +89,11 @@ namespace SignupsWorker1
             //Sparar personen i signups table
             TableOperation insertOperation = TableOperation.Insert(person);
             table.Execute(insertOperation);
-     //       TableOperation removeOperation = TableOperation.Delete(person);
+        //     TableOperation removeOperation = TableOperation.Delete(person);
        //     table.Execute(removeOperation);
         }
 
-        private void DeleteFromStorage(string email, string password)
+        private void DeleteFromStorage(Person person)
         {
             string tableName = "Registrerade";
 
@@ -102,6 +102,8 @@ namespace SignupsWorker1
             CloudTableClient tableStorage = account.CreateCloudTableClient();
             CloudTable table = tableStorage.GetTableReference(tableName);
 
+            TableOperation deleteOperation = TableOperation.Delete(person);
+            table.Execute(deleteOperation);
         }
 
         private async Task RunAsync(CancellationToken cancellationToken)
@@ -120,7 +122,7 @@ namespace SignupsWorker1
                 {
                     try
                     {
-                        Trace.WriteLine("New Signup processed: " + msg.Properties["email"]);
+                        Trace.WriteLine("New Signup processed: " + msg.Properties["email"]+ msg.Properties["password"]);
                         msg.Complete();
                         SaveToStorage((string) msg.Properties["email"],msg.Properties["password"].ToString());
                     }

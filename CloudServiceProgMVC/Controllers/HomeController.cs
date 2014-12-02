@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.WindowsAzure;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
+using Microsoft.WindowsAzure.Storage.Table;
 
 
 namespace CloudServiceProgMVC.Controllers
@@ -16,6 +18,8 @@ namespace CloudServiceProgMVC.Controllers
         string qname = "signups";
 
         private string user;
+        private string userPassword;
+        private string UserAndPassword;
 
         private string tableConnectionString = CloudConfigurationManager.GetSetting("TableStorageConnection");
 
@@ -26,15 +30,15 @@ namespace CloudServiceProgMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Registry(string email)
+        public ActionResult Registry(string email, string password)
         {
             ViewBag.email = email;
 
             var nm = NamespaceManager.CreateFromConnectionString(connectionString);
             QueueDescription qd = new QueueDescription(qname);
-            //St�ll in Max size p� queue p�  2GB
+            //Ställ in Max size på queue på  2GB
             qd.MaxSizeInMegabytes = 2048;
-            //Max Time To Live �r 5 minuter  
+            //Max Time To Live är 5 minuter  
             qd.DefaultMessageTimeToLive = new TimeSpan(0, 5, 0);
 
             if (!nm.QueueExists(qname))
@@ -46,11 +50,23 @@ namespace CloudServiceProgMVC.Controllers
             //Skapa msg med email properaty och skicka till QueueClient
             var bm = new BrokeredMessage();
             bm.Properties["email"] = email;
+            bm.Properties["password"] = password;
             qc.Send(bm);
-            user = email;
+            
+            //user = email;
+            //userPassword = password;
+            //UserAndPassword = user + " pw: " + userPassword;
+            //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ShowDataFromTable()
+        {            
+            return View();
+        }
+     
         [HttpGet]
         public ActionResult RegistryDisplay()
         {
@@ -66,6 +82,11 @@ namespace CloudServiceProgMVC.Controllers
         public ActionResult WhatHappened()
         {
             ViewBag.email = user;
+            ViewBag.userAndPassword = UserAndPassword;
+            var bm = new BrokeredMessage();
+            var userTest = bm.Properties.GetType().GetProperties();
+            ViewBag.test = userTest;
+
             return View();
         }
 
