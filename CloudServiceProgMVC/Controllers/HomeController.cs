@@ -119,5 +119,10 @@ namespace CloudServiceProgMVC.Controllers
         {
             return View();
         }
+
+        public ActionResult Kaos()
+        {
+            return View();
+        }
     }
 }
