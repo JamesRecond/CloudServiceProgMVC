@@ -25,6 +25,7 @@ namespace SignupsWorker1
 
         string connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
         private string qname = "signups";
+        private string qnameDelete = "to delete";
 
         string tableConnectionString = CloudConfigurationManager.GetSetting("TableStorageConnection");
         
@@ -70,17 +71,17 @@ namespace SignupsWorker1
             Trace.TraceInformation("SignupsWorker1 has stopped");
         }
 
-        private void GetDataFromStorage()
+        private void GetDataFromStorage(Person person)
         {
             try
             {
-                StorageCredentials creds = new StorageCredentials(accountName, accountKey);
-                CloudStorageAccount account = new CloudStorageAccount(creds, useHttps: true);
+                //StorageCredentials creds = new StorageCredentials(person.Email);
+                CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
 
                 CloudTableClient client = account.CreateCloudTableClient();
-                CloudTable table = client.GetTableReference("sportingproducts");
+                CloudTable table = client.GetTableReference("users");
 
-                TableOperation retrieveOperation = TableOperation.Retrieve<Person>("Baseball", "BBt1032");
+                TableOperation retrieveOperation = TableOperation.Retrieve<Person>("chr", "BBt1032");
 
                 TableResult query = table.Execute(retrieveOperation);
 
@@ -124,18 +125,87 @@ namespace SignupsWorker1
         //     TableOperation removeOperation = TableOperation.Delete(person);
        //     table.Execute(removeOperation);
         }
+        private void DeleteFromStorageTest(string email)
+        {
+            // Retrieve storage account from connection string
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                CloudConfigurationManager.GetSetting(connectionString));
 
+            // Create the table client
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+            //Create the CloudTable that represents the "people" table.
+            CloudTable table = tableClient.GetTableReference("signups");
+
+            // Create a retrieve operation that expects a customer entity.
+            TableOperation retrieveOperation = TableOperation.Retrieve<Person>("signups", "chrille");
+
+            // Execute the operation.
+            TableResult retrievedResult = table.Execute(retrieveOperation);
+
+            // Assign the result to a CustomerEntity.
+            Person deletePerson = (Person)retrievedResult.Result;
+
+            // Create the Delete TableOperation.
+            if (deletePerson != null)
+            {
+                TableOperation deleteOperation = TableOperation.Delete(deletePerson);
+
+                // Execute the operation.
+                table.Execute(deleteOperation);
+
+                Console.WriteLine("user deleted.");
+            }
+
+            else
+                Console.WriteLine("Could not retrieve the entity.");
+        }
         private void DeleteFromStorage(Person person)
         {
-            string tableName = "Registrerade";
+            //string tableName = "Registrerade";
 
-            CloudStorageAccount account = CloudStorageAccount.Parse(tableConnectionString);
+            //CloudStorageAccount account = CloudStorageAccount.Parse(tableConnectionString);
 
-            CloudTableClient tableStorage = account.CreateCloudTableClient();
-            CloudTable table = tableStorage.GetTableReference(tableName);
+            //CloudTableClient tableStorage = account.CreateCloudTableClient();
+            //CloudTable table = tableStorage.GetTableReference(tableName);
 
-            TableOperation deleteOperation = TableOperation.Delete(person);
-            table.Execute(deleteOperation);
+            //TableOperation deleteOperation = TableOperation.Delete(person);
+            //table.Execute(deleteOperation);
+
+          //  ----------
+
+            // Retrieve storage account from connection string
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                CloudConfigurationManager.GetSetting(connectionString));
+
+            // Create the table client
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+            //Create the CloudTable that represents the "people" table.
+            CloudTable table = tableClient.GetTableReference("signups");
+
+            // Create a retrieve operation that expects a customer entity.
+            TableOperation retrieveOperation = TableOperation.Retrieve<Person>("signups","chrille");
+
+            // Execute the operation.
+            TableResult retrievedResult = table.Execute(retrieveOperation);
+
+            // Assign the result to a CustomerEntity.
+            Person deletePerson = (Person)retrievedResult.Result;
+
+            // Create the Delete TableOperation.
+            if (deletePerson != null)
+            {
+                TableOperation deleteOperation = TableOperation.Delete(deletePerson);
+
+                // Execute the operation.
+                table.Execute(deleteOperation);
+
+                Console.WriteLine("user deleted.");
+            }
+
+            else
+                Console.WriteLine("Could not retrieve the entity.");
         }
 
         private async Task RunAsync(CancellationToken cancellationToken)
@@ -149,6 +219,9 @@ namespace SignupsWorker1
 
                 BrokeredMessage msg = qc.Receive();
 
+                    //QueueClient qcDelete = QueueClient.CreateFromConnectionString(connectionString, qnameDelete);
+                    //BrokeredMessage msgDelete = qc.Receive();
+
                 if (msg != null)
                 {
                     try
@@ -158,11 +231,24 @@ namespace SignupsWorker1
                         SaveToStorage((string) msg.Properties["email"],msg.Properties["password"].ToString());
                     }
                     catch (Exception)
-                    {
-      
+                    {    
                         msg.Abandon();
                     }
                 }
+                //if (msgDelete != null)
+                //{
+                //    try
+                //    {
+                //        Trace.WriteLine("New delete is processed: " + msgDelete.Properties["email"] + msgDelete.Properties["password"]);
+                //        msgDelete.Complete();
+                //        DeleteFromStorageTest(msgDelete.Properties["email"].ToString());
+                //    }
+                //    catch (Exception)
+                //    {
+                //        msgDelete.Abandon();
+                //    }
+
+                //}
             }
         }
     }

@@ -29,6 +29,16 @@ namespace CloudServiceProgMVC.Controllers
             return View();
         }
 
+        public ActionResult DeleteUser()
+        {
+            return View();
+        }
+
+        public ActionResult Login(string email, string password)
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Registry(string email, string password)
         {

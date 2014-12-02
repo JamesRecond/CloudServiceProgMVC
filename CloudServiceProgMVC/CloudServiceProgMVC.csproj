@@ -253,6 +253,8 @@
     <Content Include="Views\Home\WhatHappened.cshtml" />
     <Content Include="Views\Home\Knas.cshtml" />
     <Content Include="Views\Home\ShowDataFromTable.cshtml" />
+    <Content Include="Views\Home\DeleteUser.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
