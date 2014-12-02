@@ -69,10 +69,10 @@ namespace SignupsWorker1
             Trace.TraceInformation("SignupsWorker1 has stopped");
         }
 
-        private void SaveToStorage(string email)
+        private void SaveToStorage(string email, string password)
         {
  
-            string tableName = "signups";
+            string tableName = "Registrerade";
             //Connection till table storage account
             CloudStorageAccount account = CloudStorageAccount.Parse(tableConnectionString);
     
@@ -82,16 +82,27 @@ namespace SignupsWorker1
             table.CreateIfNotExists();
 
             //Skapar den entitet som ska in i storage
-            Person person = new Person(email);
+            Person person = new Person(email,password);
             person.Email = email;
+            person.Password = password;
 
             //Sparar personen i signups table
             TableOperation insertOperation = TableOperation.Insert(person);
             table.Execute(insertOperation);
-            TableOperation removeOperation = TableOperation.Delete(person);
-            table.Execute(removeOperation);
+     //       TableOperation removeOperation = TableOperation.Delete(person);
+       //     table.Execute(removeOperation);
         }
 
+        private void DeleteFromStorage(string email, string password)
+        {
+            string tableName = "Registrerade";
+
+            CloudStorageAccount account = CloudStorageAccount.Parse(tableConnectionString);
+
+            CloudTableClient tableStorage = account.CreateCloudTableClient();
+            CloudTable table = tableStorage.GetTableReference(tableName);
+
+        }
 
         private async Task RunAsync(CancellationToken cancellationToken)
         {
@@ -111,7 +122,7 @@ namespace SignupsWorker1
                     {
                         Trace.WriteLine("New Signup processed: " + msg.Properties["email"]);
                         msg.Complete();
-                        SaveToStorage(msg.Properties["email"].ToString());
+                        SaveToStorage((string) msg.Properties["email"],msg.Properties["password"].ToString());
                     }
                     catch (Exception)
                     {
