@@ -316,6 +316,6 @@ C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgM
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\bin\ru\System.Spatial.resources.dll
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\bin\zh-Hant\System.Spatial.resources.dll
-C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\obj\Debug\CloudServiceProgMVC.csprojResolveAssemblyReference.cache
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\obj\Debug\CloudServiceProgMVC.dll
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\obj\Debug\CloudServiceProgMVC.pdb
+C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\obj\Debug\CloudServiceProgMVC.csprojResolveAssemblyReference.cache

@@ -44,6 +44,7 @@
   <WorkerRole name="LoginWorker" vmsize="Small">
     <ConfigurationSettings>
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
+      <Setting name="TableStorageConnection" />
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">

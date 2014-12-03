@@ -19,6 +19,7 @@
     </LocalResources>
     <ConfigurationSettings>
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
+      <Setting name="TableStorageConnection" />
     </ConfigurationSettings>
     <Endpoints />
     <Certificates />

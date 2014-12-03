@@ -13,7 +13,6 @@ namespace LoginWorker
         {
             this.PartitionKey = "signups";
             this.RowKey = email;
-            Password = password;
         }
 
         public Person() { }

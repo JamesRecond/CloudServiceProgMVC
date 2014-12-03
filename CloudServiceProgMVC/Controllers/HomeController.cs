@@ -40,41 +40,44 @@ namespace CloudServiceProgMVC.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Login(string email, string password)
-        //{
-        //    var nmLogin = NamespaceManager.CreateFromConnectionString(connectionString);
-        //    QueueDescription qdLogin = new QueueDescription(qnameLogin);
-        //    //Ställ in Max size på queue på  2GB
-        //    qdLogin.MaxSizeInMegabytes = 2048;
-        //    //Max Time To Live är 5 minuter  
-        //    qdLogin.DefaultMessageTimeToLive = new TimeSpan(0, 5, 0);
-
-        //    if (!nmLogin.QueueExists(qnameLogin))
-        //    {
-        //        nmLogin.CreateQueue(qdLogin);
-        //    }
-        //    QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
-
-        //    //Skapa msg med email properaty och skicka till QueueClient
-        //    var bm = new BrokeredMessage();
-        //    bm.Properties["email"] = email;
-        //    bm.Properties["password"] = password;
-        //    qc.Send(bm);
-
-        //    //user = email;
-        //    //userPassword = password;
-        //    //UserAndPassword = user + " pw: " + userPassword;
-        //    //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
-
-        //    return MainPageLogged(true);
-        //}
-
-        public ActionResult MainPageLogged(bool b)
+        [HttpPost]
+        public ActionResult Login(string LoginEmail, string LoginPassword)
         {
-            ViewBag.testBoolean = b.ToString();
+            var nmLogin = NamespaceManager.CreateFromConnectionString(connectionString);
+            QueueDescription qdLogin = new QueueDescription(qnameLogin);
+            //Ställ in Max size på queue på  2GB
+            qdLogin.MaxSizeInMegabytes = 2048;
+            //Max Time To Live är 5 minuter  
+            qdLogin.DefaultMessageTimeToLive = new TimeSpan(0, 5, 0);
+
+            if (!nmLogin.QueueExists(qnameLogin))
+            {
+                nmLogin.CreateQueue(qdLogin);
+            }
+            QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
+
+            //Skapa msg med email properaty och skicka till QueueClient
+            var bm = new BrokeredMessage();
+            bm.Properties["email"] = LoginEmail;
+            bm.Properties["password"] = LoginPassword;
+            qc.Send(bm);
+
+            //user = email;
+            //userPassword = password;
+            //UserAndPassword = user + " pw: " + userPassword;
+            //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
+
+            return MainPageLogged();
+        }
+
+        public ActionResult MainPageLogged()
+        {
+            QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);
+
+            BrokeredMessage msg = qc.Receive();
             //var user = email;
             //var userPW = password;
+            ViewBag.testBoolean = msg.Properties["user"];
             return View();
         }
 

@@ -2,6 +2,8 @@
     ViewBag.Title = "Home Page";
     
 }
+<h2>Test</h2>
+@Html.ActionLink("Logga in", "Login")
 <h2>@ViewBag.Message</h2>
 <form action="/Home/Newsletter" method="post">
     @Html.TextBox("email")
@@ -30,7 +32,8 @@
         </form>
 
     <button name="btnShowTable"></button>
-    @Html.ActionLink("Till loginsidan", "Login", "Home", null, new { @class = "navbar-brand" })
+    @*@Html.ActionLink("Till loginsidan", "Login", "Home", null, new { @class = "navbar-brand" })*@
+
 
 
 

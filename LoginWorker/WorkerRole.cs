@@ -21,24 +21,25 @@ namespace LoginWorker
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
 
         string connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
-
-        private string qname = "Login"; 
-
         string tableConnectionString = CloudConfigurationManager.GetSetting("TableStorageConnection");
-        
-        //public override void Run()
-        //{
-        //    Trace.TraceInformation("LoginWorker is running");
 
-        //    try
-        //    {
-        //       this.RunAsync(this.cancellationTokenSource.Token).Wait();
-        //    }
-        //    finally
-        //    {
-        //        this.runCompleteEvent.Set();
-        //    }
-        //}
+        private string qname = "Login";
+
+        private Person user;
+
+        public override void Run()
+        {
+            Trace.TraceInformation("LoginWorker is running");
+
+            try
+            {
+                this.RunAsync(this.cancellationTokenSource.Token).Wait();
+            }
+            finally
+            {
+                this.runCompleteEvent.Set();
+            }
+        }
 
         public override bool OnStart()
         {
@@ -67,17 +68,18 @@ namespace LoginWorker
             Trace.TraceInformation("loginWorker has stopped");
         }
 
-        private bool CheckStorage(string email, string password)
+        private Person CheckStorage(string email, string password)
         {
+            string tableName = "Registrerade";
             try
             {
                 //StorageCredentials creds = new StorageCredentials(person.Email);
-                CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+                CloudStorageAccount account = CloudStorageAccount.Parse(tableConnectionString);
 
                 CloudTableClient client = account.CreateCloudTableClient();
-                CloudTable table = client.GetTableReference("users");
+                CloudTable table = client.GetTableReference(tableName);
 
-                TableOperation retrieveOperation = TableOperation.Retrieve<Person>(email, password);
+                TableOperation retrieveOperation = TableOperation.Retrieve<Person>("signups", email);
 
                 TableResult user = table.Execute(retrieveOperation);
 
@@ -87,37 +89,40 @@ namespace LoginWorker
                 //var bm = new BrokeredMessage();
                 if (person.Email == email)
                 {
+
                     //Console.WriteLine("Product: {0}", ((Person)query.Result).Email);
-                  
+                    Trace.WriteLine(person.Email);
+
+                    Console.WriteLine(person.Email);
+                    return person;
                     //bm.Properties["email"] = email;
                     //bm.Properties["password"] = password;
                     //qc.Send(bm);
-                    return true;
+
                 }
                 else
                 {  
-                    Console.WriteLine("The fag was not found.");
-                    return false;
-
+                    Trace.WriteLine("The fag was not found.");
+                    Console.WriteLine("FAGGITY");
+                    return null;
                 }
 
             }
             catch (Exception ex)
             {
+                Trace.WriteLine(ex);
                 Console.WriteLine(ex);
-                return false;
+             
             }
+            return null;
             
         }
 
-        
-      
-
-        private async Task<bool> RunAsync(CancellationToken cancellationToken)
+        private async Task<Person> RunAsync(CancellationToken cancellationToken)
         {
             while (true)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
                 Trace.TraceInformation("Processing check..", "Information");
 
                 QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);
@@ -133,12 +138,18 @@ namespace LoginWorker
                     {
                         Trace.WriteLine("New login processed: " + msg.Properties["email"] + msg.Properties["password"]);
                         msg.Complete();
-                        CheckStorage((string) msg.Properties["email"], msg.Properties["password"].ToString());
-                        return true;
+                        user = CheckStorage((string) msg.Properties["email"], msg.Properties["password"].ToString());
+                        Console.WriteLine();
+                        var bm = new BrokeredMessage();
+                        bm.Properties["user"] = "true";
+                   
+                        qc.Send(bm);
+            
+                        return user;
                     }
                     catch (Exception)
                     {
-                        msg.Abandon();
+                        msg.Abandon();  
                     }
                 }
                 //if (msgDelete != null)
@@ -153,7 +164,7 @@ namespace LoginWorker
                 //    {
                 //        msgDelete.Abandon();
                 //    }
-
+                return null;
                 //}
             }
         }

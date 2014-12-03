@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CloudServiceProgMVC.Azure1" generation="1" functional="0" release="0" Id="45699ce9-69c1-4e38-be5f-9c86633f5705" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CloudServiceProgMVC.Azure1" generation="1" functional="0" release="0" Id="b529bde1-8060-49cc-8961-ac0e2432226c" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="CloudServiceProgMVC.Azure1Group" generation="1" functional="0" release="0">
       <componentports>
@@ -28,6 +28,11 @@
         <aCS name="LoginWorker:Microsoft.ServiceBus.ConnectionString" defaultValue="">
           <maps>
             <mapMoniker name="/CloudServiceProgMVC.Azure1/CloudServiceProgMVC.Azure1Group/MapLoginWorker:Microsoft.ServiceBus.ConnectionString" />
+          </maps>
+        </aCS>
+        <aCS name="LoginWorker:TableStorageConnection" defaultValue="">
+          <maps>
+            <mapMoniker name="/CloudServiceProgMVC.Azure1/CloudServiceProgMVC.Azure1Group/MapLoginWorker:TableStorageConnection" />
           </maps>
         </aCS>
         <aCS name="LoginWorkerInstances" defaultValue="[1,1,1]">
@@ -79,6 +84,11 @@
             <aCSMoniker name="/CloudServiceProgMVC.Azure1/CloudServiceProgMVC.Azure1Group/LoginWorker/Microsoft.ServiceBus.ConnectionString" />
           </setting>
         </map>
+        <map name="MapLoginWorker:TableStorageConnection" kind="Identity">
+          <setting>
+            <aCSMoniker name="/CloudServiceProgMVC.Azure1/CloudServiceProgMVC.Azure1Group/LoginWorker/TableStorageConnection" />
+          </setting>
+        </map>
         <map name="MapLoginWorkerInstances" kind="Identity">
           <setting>
             <sCSPolicyIDMoniker name="/CloudServiceProgMVC.Azure1/CloudServiceProgMVC.Azure1Group/LoginWorkerInstances" />
@@ -126,6 +136,7 @@
           <role name="LoginWorker" generation="1" functional="0" release="0" software="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\csx\Debug\roles\LoginWorker" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="-1" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <settings>
               <aCS name="Microsoft.ServiceBus.ConnectionString" defaultValue="" />
+              <aCS name="TableStorageConnection" defaultValue="" />
               <aCS name="__ModelData" defaultValue="&lt;m role=&quot;LoginWorker&quot; xmlns=&quot;urn:azure:m:v1&quot;&gt;&lt;r name=&quot;CloudServiceProgMVC&quot;&gt;&lt;e name=&quot;Endpoint1&quot; /&gt;&lt;/r&gt;&lt;r name=&quot;LoginWorker&quot; /&gt;&lt;r name=&quot;SignupsWorker1&quot; /&gt;&lt;/m&gt;" />
             </settings>
             <resourcereferences>
@@ -172,9 +183,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="e0e76639-55d5-46ae-8043-f8f71c286279" ref="Microsoft.RedDog.Contract\ServiceContract\CloudServiceProgMVC.Azure1Contract@ServiceDefinition">
+    <implementation Id="cb9fda03-52e7-40a6-ba48-ebe198deba25" ref="Microsoft.RedDog.Contract\ServiceContract\CloudServiceProgMVC.Azure1Contract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="5f1cb8d1-e3dd-4d04-88fe-afe06ddf7a85" ref="Microsoft.RedDog.Contract\Interface\CloudServiceProgMVC:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="2c4981f0-ba3f-4f49-8421-7b74f0a4ab79" ref="Microsoft.RedDog.Contract\Interface\CloudServiceProgMVC:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/CloudServiceProgMVC.Azure1/CloudServiceProgMVC.Azure1Group/CloudServiceProgMVC:Endpoint1" />
           </inPort>
