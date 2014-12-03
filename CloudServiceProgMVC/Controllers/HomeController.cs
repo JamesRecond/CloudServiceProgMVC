@@ -33,9 +33,23 @@ namespace CloudServiceProgMVC.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
 
+        [HttpPost]
         public ActionResult Login(string email, string password)
         {
+
+            return View();
+        }
+
+        public ActionResult MainPageLogged()
+        {
+            //var user = email;
+            //var userPW = password;
             return View();
         }
 
@@ -80,8 +94,7 @@ namespace CloudServiceProgMVC.Controllers
      
         [HttpGet]
         public ActionResult RegistryDisplay()
-        {
-            
+        {         
             return View();
         }
         //[HttpPost]

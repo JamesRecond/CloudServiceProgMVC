@@ -9,6 +9,8 @@ Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "CloudServiceProgMVC.Azure1"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignupsWorker1", "SignupsWorker1\SignupsWorker1.csproj", "{E0597231-9980-41E3-B0F3-3E227A9DE6B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginWorker", "LoginWorker\LoginWorker.csproj", "{13D29FF5-ED7A-47AA-A22D-116B2576DF64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E0597231-9980-41E3-B0F3-3E227A9DE6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0597231-9980-41E3-B0F3-3E227A9DE6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0597231-9980-41E3-B0F3-3E227A9DE6B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13D29FF5-ED7A-47AA-A22D-116B2576DF64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13D29FF5-ED7A-47AA-A22D-116B2576DF64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13D29FF5-ED7A-47AA-A22D-116B2576DF64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13D29FF5-ED7A-47AA-A22D-116B2576DF64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

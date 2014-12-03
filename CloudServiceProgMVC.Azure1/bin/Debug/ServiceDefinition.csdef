@@ -24,21 +24,16 @@
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
       <Setting name="TableStorageConnection" />
     </ConfigurationSettings>
-    <Contents>
-      <Content destination=".\">
-        <SourceDirectory path="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Debug\CloudServiceProgMVCContent\" />
-      </Content>
-    </Contents>
   </WebRole>
   <WorkerRole name="SignupsWorker1" vmsize="Small">
     <ConfigurationSettings>
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
       <Setting name="TableStorageConnection" />
     </ConfigurationSettings>
-    <Contents>
-      <Content destination=".\">
-        <SourceDirectory path="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Debug\SignupsWorker1Content\" />
-      </Content>
-    </Contents>
+  </WorkerRole>
+  <WorkerRole name="LoginWorker" vmsize="Small">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.ServiceBus.ConnectionString" />
+    </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>

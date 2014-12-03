@@ -22,4 +22,9 @@
       <Setting name="TableStorageConnection" />
     </ConfigurationSettings>
   </WorkerRole>
+  <WorkerRole name="LoginWorker" vmsize="Small">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.ServiceBus.ConnectionString" />
+    </ConfigurationSettings>
+  </WorkerRole>
 </ServiceDefinition>

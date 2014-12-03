@@ -45,6 +45,14 @@
       <RoleName>CloudServiceProgMVC</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
+    <ProjectReference Include="..\LoginWorker\LoginWorker.csproj">
+      <Name>LoginWorker</Name>
+      <Project>{13d29ff5-ed7a-47aa-a22d-116b2576df64}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>LoginWorker</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
     <ProjectReference Include="..\SignupsWorker1\SignupsWorker1.csproj">
       <Name>SignupsWorker1</Name>
       <Project>{e0597231-9980-41e3-b0f3-3e227a9de6b3}</Project>
@@ -56,12 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CloudServiceProgMVCContent\" />
+    <Folder Include="LoginWorkerContent\" />
     <Folder Include="Profiles" />
     <Folder Include="SignupsWorker1Content\" />
     <Folder Include="SignupsWorkerContent\" />
   </ItemGroup>
   <ItemGroup>
     <DiagnosticsConfiguration Include="CloudServiceProgMVCContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="LoginWorkerContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="SignupsWorker1Content\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="SignupsWorkerContent\diagnostics.wadcfgx" />
   </ItemGroup>
