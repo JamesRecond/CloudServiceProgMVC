@@ -16,6 +16,7 @@ namespace CloudServiceProgMVC.Controllers
     {
         string connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
         string qname = "signups";
+        private string qnameLogin = "Login";
 
         private string user;
         private string userPassword;
@@ -39,15 +40,39 @@ namespace CloudServiceProgMVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Login(string email, string password)
-        {
+        //[HttpPost]
+        //public ActionResult Login(string email, string password)
+        //{
+        //    var nmLogin = NamespaceManager.CreateFromConnectionString(connectionString);
+        //    QueueDescription qdLogin = new QueueDescription(qnameLogin);
+        //    //Ställ in Max size på queue på  2GB
+        //    qdLogin.MaxSizeInMegabytes = 2048;
+        //    //Max Time To Live är 5 minuter  
+        //    qdLogin.DefaultMessageTimeToLive = new TimeSpan(0, 5, 0);
 
-            return View();
-        }
+        //    if (!nmLogin.QueueExists(qnameLogin))
+        //    {
+        //        nmLogin.CreateQueue(qdLogin);
+        //    }
+        //    QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
 
-        public ActionResult MainPageLogged()
+        //    //Skapa msg med email properaty och skicka till QueueClient
+        //    var bm = new BrokeredMessage();
+        //    bm.Properties["email"] = email;
+        //    bm.Properties["password"] = password;
+        //    qc.Send(bm);
+
+        //    //user = email;
+        //    //userPassword = password;
+        //    //UserAndPassword = user + " pw: " + userPassword;
+        //    //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
+
+        //    return MainPageLogged(true);
+        //}
+
+        public ActionResult MainPageLogged(bool b)
         {
+            ViewBag.testBoolean = b.ToString();
             //var user = email;
             //var userPW = password;
             return View();

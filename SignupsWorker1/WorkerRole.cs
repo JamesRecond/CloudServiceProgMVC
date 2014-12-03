@@ -115,7 +115,7 @@ namespace SignupsWorker1
             table.CreateIfNotExists();
 
             //Skapar den entitet som ska in i storage
-            Person person = new Person(email,password);
+            Person person = new Person(email);
             person.Email = email;
             person.Password = password;
 
@@ -212,7 +212,7 @@ namespace SignupsWorker1
         { 
             while (true)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(1000);
                 Trace.TraceInformation("Processing Signups..", "Information");
 
                 QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);

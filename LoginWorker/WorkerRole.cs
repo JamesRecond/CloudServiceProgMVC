@@ -26,20 +26,19 @@ namespace LoginWorker
 
         string tableConnectionString = CloudConfigurationManager.GetSetting("TableStorageConnection");
         
+        //public override void Run()
+        //{
+        //    Trace.TraceInformation("LoginWorker is running");
 
-        public override void Run()
-        {
-            Trace.TraceInformation("SignupsWorker1 is running");
-
-            try
-            {
-                this.RunAsync(this.cancellationTokenSource.Token).Wait();
-            }
-            finally
-            {
-                this.runCompleteEvent.Set();
-            }
-        }
+        //    try
+        //    {
+        //       this.RunAsync(this.cancellationTokenSource.Token).Wait();
+        //    }
+        //    finally
+        //    {
+        //        this.runCompleteEvent.Set();
+        //    }
+        //}
 
         public override bool OnStart()
         {
@@ -51,24 +50,24 @@ namespace LoginWorker
 
             bool result = base.OnStart();
 
-            Trace.TraceInformation("SignupsWorker1 has been started");
+            Trace.TraceInformation("loginWorker has been started");
 
             return result;
         }
 
         public override void OnStop()
         {
-            Trace.TraceInformation("SignupsWorker1 is stopping");
+            Trace.TraceInformation("loginWorker is stopping");
 
             this.cancellationTokenSource.Cancel();
             this.runCompleteEvent.WaitOne();
 
             base.OnStop();
 
-            Trace.TraceInformation("SignupsWorker1 has stopped");
+            Trace.TraceInformation("loginWorker has stopped");
         }
 
-        private Person CheckStorage(string email, string password)
+        private bool CheckStorage(string email, string password)
         {
             try
             {
@@ -85,33 +84,41 @@ namespace LoginWorker
                 Person person = new Person();
                 person = (Person) user.Result;
             //    person.Email = account;
-
-                if (person != null)
+                //var bm = new BrokeredMessage();
+                if (person.Email == email)
                 {
                     //Console.WriteLine("Product: {0}", ((Person)query.Result).Email);
-                    return person;
+                  
+                    //bm.Properties["email"] = email;
+                    //bm.Properties["password"] = password;
+                    //qc.Send(bm);
+                    return true;
                 }
                 else
-                {
+                {  
                     Console.WriteLine("The fag was not found.");
+                    return false;
+
                 }
 
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                return false;
             }
+            
         }
 
         
       
 
-        private async Task RunAsync(CancellationToken cancellationToken)
+        private async Task<bool> RunAsync(CancellationToken cancellationToken)
         {
             while (true)
             {
                 Thread.Sleep(10000);
-                Trace.TraceInformation("Processing Signups..", "Information");
+                Trace.TraceInformation("Processing check..", "Information");
 
                 QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);
 
@@ -127,6 +134,7 @@ namespace LoginWorker
                         Trace.WriteLine("New login processed: " + msg.Properties["email"] + msg.Properties["password"]);
                         msg.Complete();
                         CheckStorage((string) msg.Properties["email"], msg.Properties["password"].ToString());
+                        return true;
                     }
                     catch (Exception)
                     {

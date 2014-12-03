@@ -9,11 +9,10 @@ namespace SignupsWorker1
 {
     class Person : TableEntity
     {
-        public Person(string email, string password)
+        public Person(string email)
         {
             this.PartitionKey = "signups";
             this.RowKey = email;
-            Password = password;
         }
 
         public Person() { }

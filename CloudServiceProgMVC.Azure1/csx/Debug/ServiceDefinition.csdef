@@ -13,6 +13,16 @@
     </Endpoints>
     <Certificates />
   </WebRole>
+  <WorkerRole name="LoginWorker">
+    <LocalResources>
+      <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
+    </LocalResources>
+    <ConfigurationSettings>
+      <Setting name="Microsoft.ServiceBus.ConnectionString" />
+    </ConfigurationSettings>
+    <Endpoints />
+    <Certificates />
+  </WorkerRole>
   <WorkerRole name="SignupsWorker1">
     <LocalResources>
       <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
