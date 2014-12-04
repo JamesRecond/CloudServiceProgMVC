@@ -111,6 +111,33 @@ namespace LoginWorker
 
         }
 
+        private void UpdatePerson(string currentPage, string email)
+        {
+            string tableName = "Registrerade";
+            //Connection till table storage account
+            CloudStorageAccount account = CloudStorageAccount.Parse(tableConnectionString);
+
+            CloudTableClient tableStorage = account.CreateCloudTableClient();
+
+            CloudTable table = tableStorage.GetTableReference(tableName);
+            table.CreateIfNotExists();
+
+            TableOperation retrieveOperation = TableOperation.Retrieve<Person>("signups", email);
+            TableResult retrievedResult = table.Execute(retrieveOperation);
+            //Skapar den entitet som ska in i storage
+            Person person = (Person)retrievedResult.Result;
+            if (person != null)
+            {
+                person.CurrentPage = currentPage;
+                TableOperation updateOperation = TableOperation.Replace(person);
+                table.Execute(updateOperation);
+            }
+
+            //Sparar personen i signups table
+            TableOperation insertOperation = TableOperation.InsertOrReplace(person);
+            table.Execute(insertOperation);
+        }
+
         private async Task<Person> RunAsync(CancellationToken cancellationToken)
         {
             while (true)
@@ -121,6 +148,11 @@ namespace LoginWorker
                 QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);
 
                 BrokeredMessage msg = qc.Receive();
+
+                if (msg.Properties["action"].ToString() == "Update")
+                {
+                    UpdatePerson(msg.Properties["currentPage"].ToString(), msg.Properties["email"].ToString());
+                }
 
                 if (msg != null)
                 {

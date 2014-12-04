@@ -68,7 +68,8 @@ namespace CloudServiceProgMVC.Controllers
             {
                 if (person.Email == LoginEmail && person.Password == LoginPassword)
                 {
-                    return RedirectToAction("Registry");
+                    Session["user"] = person;
+                    return RedirectToAction(person.CurrentPage);
                 }
             }
             else
@@ -112,6 +113,13 @@ namespace CloudServiceProgMVC.Controllers
         [HttpGet]
         public ActionResult RegistryDisplay()
         {
+            Person person = (Person)Session["user"];
+            QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
+            var bm = new BrokeredMessage();
+            bm.Properties["email"] = person.Email;
+            bm.Properties["currentPage"] = "RegistryDisplay";
+            bm.Properties["action"] = "Update";
+            qc.Send(bm);
             return View();
         }
 
