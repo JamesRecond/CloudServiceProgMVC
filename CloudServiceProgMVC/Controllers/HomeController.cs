@@ -26,7 +26,7 @@ namespace CloudServiceProgMVC.Controllers
 
         public ActionResult Index()
         {
-           
+
             return View();
         }
 
@@ -58,8 +58,8 @@ namespace CloudServiceProgMVC.Controllers
 
             //Skapa msg med email properaty och skicka till QueueClient
             var bm = new BrokeredMessage();
-            bm.Properties["email"] = LoginEmail;
-            bm.Properties["password"] = LoginPassword;
+            bm.Properties["LoginEmail"] = LoginEmail;
+            bm.Properties["LoginPassword"] = LoginPassword;
             qc.Send(bm);
 
             //user = email;
@@ -67,18 +67,33 @@ namespace CloudServiceProgMVC.Controllers
             //UserAndPassword = user + " pw: " + userPassword;
             //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
 
-            return MainPageLogged();
+            return RedirectToAction("MainPageLogged");
         }
 
         public ActionResult MainPageLogged()
         {
-            QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);
+            QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
 
             BrokeredMessage msg = qc.Receive();
-            //var user = email;
-            //var userPW = password;
-            ViewBag.testBoolean = msg.Properties["user"];
-            return View();
+
+
+            try
+            {
+                if (msg != null)
+                {
+                    if ((bool)msg.Properties["Validated"])
+                    {
+                        ViewBag.testBoolean = msg.Properties["user"];
+                        return View();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("Login");
+            }
+            return RedirectToAction("Login");
         }
 
         [HttpPost]
@@ -104,7 +119,7 @@ namespace CloudServiceProgMVC.Controllers
             bm.Properties["email"] = email;
             bm.Properties["password"] = password;
             qc.Send(bm);
-            
+
             //user = email;
             //userPassword = password;
             //UserAndPassword = user + " pw: " + userPassword;
@@ -115,14 +130,14 @@ namespace CloudServiceProgMVC.Controllers
 
         [HttpGet]
         public ActionResult ShowDataFromTable()
-        {    
-            
+        {
+
             return View();
         }
-     
+
         [HttpGet]
         public ActionResult RegistryDisplay()
-        {         
+        {
             return View();
         }
         //[HttpPost]

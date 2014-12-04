@@ -122,7 +122,7 @@ namespace LoginWorker
         {
             while (true)
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(00);
                 Trace.TraceInformation("Processing check..", "Information");
 
                 QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);
@@ -136,15 +136,24 @@ namespace LoginWorker
                 {
                     try
                     {
-                        Trace.WriteLine("New login processed: " + msg.Properties["email"] + msg.Properties["password"]);
-                        msg.Complete();
-                        user = CheckStorage((string) msg.Properties["email"], msg.Properties["password"].ToString());
+                        Trace.WriteLine("New login processed: " + msg.Properties["LoginEmail"] + msg.Properties["LoginPassword"]);
+                        msg.Complete();                   
+                        user = CheckStorage((string) msg.Properties["LoginEmail"], msg.Properties["LoginPassword"].ToString());
                         Console.WriteLine();
-                        var bm = new BrokeredMessage();
-                        bm.Properties["user"] = "true";
-                   
-                        qc.Send(bm);
-            
+
+                        if (user != null)
+                        {
+                            var bm = new BrokeredMessage();
+                            bm.Properties["user"] = user.Email;
+                            bm.Properties["Validated"] = true;
+                            qc.Send(bm);
+                        }
+                        else
+                        {
+                            var bm = new BrokeredMessage();
+                            bm.Properties["Validated"] = false;
+                            qc.Send(bm);
+                        }
                         return user;
                     }
                     catch (Exception)

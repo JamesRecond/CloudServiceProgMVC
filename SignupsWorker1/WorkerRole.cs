@@ -212,7 +212,7 @@ namespace SignupsWorker1
         { 
             while (true)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(00);
                 Trace.TraceInformation("Processing Signups..", "Information");
 
                 QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qname);

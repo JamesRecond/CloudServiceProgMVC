@@ -114,5 +114,6 @@ C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\SignupsWorker1\bi
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\SignupsWorker1\bin\Debug\ru\System.Spatial.resources.dll
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\SignupsWorker1\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\SignupsWorker1\bin\Debug\zh-Hant\System.Spatial.resources.dll
+C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\SignupsWorker1\obj\Debug\SignupsWorker1.csprojResolveAssemblyReference.cache
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\SignupsWorker1\obj\Debug\SignupsWorker1.dll
 C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\SignupsWorker1\obj\Debug\SignupsWorker1.pdb
