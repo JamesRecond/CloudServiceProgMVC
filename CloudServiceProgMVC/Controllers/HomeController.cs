@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Microsoft.WindowsAzure;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 
 
@@ -34,41 +36,85 @@ namespace CloudServiceProgMVC.Controllers
         {
             return View();
         }
+
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult LoginTestResult()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string LoginEmail, string LoginPassword)
+        public ActionResult LoginTestResult(string LoginEmail, string LoginPassword)
         {
-            var nmLogin = NamespaceManager.CreateFromConnectionString(connectionString);
-            QueueDescription qdLogin = new QueueDescription(qnameLogin);
-            //Ställ in Max size på queue på  2GB
-            qdLogin.MaxSizeInMegabytes = 2048;
-            //Max Time To Live är 5 minuter  
-            qdLogin.DefaultMessageTimeToLive = new TimeSpan(0, 5, 0);
+            string tableName = "Registrerade";
+            // Retrieve the storage account from the connection string.
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                CloudConfigurationManager.GetSetting("TableStorageConnection"));
 
-            if (!nmLogin.QueueExists(qnameLogin))
+            // Create the table client.
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+            // Create the CloudTable object that represents the "people" table.
+            CloudTable table = tableClient.GetTableReference(tableName);
+
+            // Create a retrieve operation that takes a customer entity.
+            TableOperation retrieveOperation = TableOperation.Retrieve<Person>("signups", LoginEmail);
+
+            // Execute the retrieve operation.
+            TableResult retrievedResult = table.Execute(retrieveOperation);
+
+            Person person = (Person)retrievedResult.Result;
+            // Print the phone number of the result.
+            if (person.Email == LoginEmail && person.Password == LoginPassword)
             {
-                nmLogin.CreateQueue(qdLogin);
+                return RedirectToAction("LoggedIn");
             }
-            QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
+            else
+                Console.WriteLine("You are not registred.");
 
-            //Skapa msg med email properaty och skicka till QueueClient
-            var bm = new BrokeredMessage();
-            bm.Properties["LoginEmail"] = LoginEmail;
-            bm.Properties["LoginPassword"] = LoginPassword;
-            qc.Send(bm);
-
-            //user = email;
-            //userPassword = password;
-            //UserAndPassword = user + " pw: " + userPassword;
-            //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
-
-            return RedirectToAction("MainPageLogged");
+            return View();
         }
+
+        public ActionResult LoggedIn()
+        {
+            return View();
+        }
+
+        //[HttpGet]
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public ActionResult Login(string LoginEmail, string LoginPassword)
+        //{
+        //    var nmLogin = NamespaceManager.CreateFromConnectionString(connectionString);
+        //    QueueDescription qdLogin = new QueueDescription(qnameLogin);
+        //    //Ställ in Max size på queue på  2GB
+        //    qdLogin.MaxSizeInMegabytes = 2048;
+        //    //Max Time To Live är 5 minuter  
+        //    qdLogin.DefaultMessageTimeToLive = new TimeSpan(0, 5, 0);
+
+        //    if (!nmLogin.QueueExists(qnameLogin))
+        //    {
+        //        nmLogin.CreateQueue(qdLogin);
+        //    }
+        //    QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
+
+        //    //Skapa msg med email properaty och skicka till QueueClient
+        //    var bm = new BrokeredMessage();
+        //    bm.Properties["LoginEmail"] = LoginEmail;
+        //    bm.Properties["LoginPassword"] = LoginPassword;
+        //    qc.Send(bm);
+
+        //    //user = email;
+        //    //userPassword = password;
+        //    //UserAndPassword = user + " pw: " + userPassword;
+        //    //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
+
+        //    return RedirectToAction("MainPageLogged");
+        //}
 
         public ActionResult MainPageLogged()
         {

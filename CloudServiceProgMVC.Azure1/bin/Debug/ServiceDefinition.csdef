@@ -26,7 +26,7 @@
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Debug\CloudServiceProgMVCContent\" />
+        <SourceDirectory path="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Debug\CloudServiceProgMVCContent\" />
       </Content>
     </Contents>
   </WebRole>
@@ -37,7 +37,7 @@
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Debug\SignupsWorker1Content\" />
+        <SourceDirectory path="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Debug\SignupsWorker1Content\" />
       </Content>
     </Contents>
   </WorkerRole>
@@ -48,7 +48,7 @@
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Debug\LoginWorkerContent\" />
+        <SourceDirectory path="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\rcf\Debug\LoginWorkerContent\" />
       </Content>
     </Contents>
   </WorkerRole>

@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "LoginTestResult";
+}
+
+<h2>LoginTestResult</h2>
+<form action="/Home/LoginTestResult" method="post">
+    <h4>Email</h4> @Html.TextBox("LoginEmail")
+    <h4>Lösenord</h4> @Html.TextBox("LoginPassword")
+    <input type="submit" value="Logga in" />
+</form>
+

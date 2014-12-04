@@ -197,6 +197,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -257,6 +258,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\LoginAccepted.cshtml" />
     <Content Include="Views\Home\MainPageLogged.cshtml" />
+    <Content Include="Views\Home\LoginTestResult.cshtml" />
+    <Content Include="Views\Home\LoggedIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

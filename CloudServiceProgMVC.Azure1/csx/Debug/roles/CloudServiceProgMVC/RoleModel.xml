@@ -15,14 +15,14 @@
     <Property name="SetConfiguration" value="Configuration=Debug" />
     <Property name="SetPlatform" value="Platform=AnyCPU" />
     <Property name="RoleTargetFramework" value="v4.5" />
-    <Property name="OutputDir" value="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\obj\Debug\CloudServiceProgMVC\" />
+    <Property name="OutputDir" value="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\obj\Debug\CloudServiceProgMVC\" />
     <Property name="EntryPoint" value="CloudServiceProgMVC.dll" />
-    <Property name="SourceDir" value="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\" />
-    <Property name="SitePhysicalPath" value="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\" />
+    <Property name="SourceDir" value="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\" />
+    <Property name="SitePhysicalPath" value="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\" />
     <Property name="TargetRuntimeVersion" value="v4.0" />
   </Properties>
   <Sites>
-    <Site name="Web" physicalDirectory="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\">
+    <Site name="Web" physicalDirectory="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC\">
       <Bindings>
         <Binding name="Endpoint1" endpointName="Endpoint1" />
       </Bindings>
