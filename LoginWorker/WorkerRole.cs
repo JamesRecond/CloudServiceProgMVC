@@ -16,7 +16,7 @@ namespace LoginWorker
 {
     public class WorkerRole : RoleEntryPoint
     {
-        
+
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
 
@@ -71,9 +71,9 @@ namespace LoginWorker
         private Person CheckStorage(string email, string password)
         {
             string tableName = "Registrerade";
+
             try
             {
-                //StorageCredentials creds = new StorageCredentials(person.Email);
                 CloudStorageAccount account = CloudStorageAccount.Parse(tableConnectionString);
 
                 CloudTableClient client = account.CreateCloudTableClient();
@@ -84,24 +84,17 @@ namespace LoginWorker
                 TableResult user = table.Execute(retrieveOperation);
 
                 Person person = new Person();
-                person = (Person) user.Result;
-            //    person.Email = account;
-                //var bm = new BrokeredMessage();
+                person = (Person)user.Result;
+
                 if (person.Email == email)
                 {
-
-                    //Console.WriteLine("Product: {0}", ((Person)query.Result).Email);
                     Trace.WriteLine(person.Email);
 
                     Console.WriteLine(person.Email);
                     return person;
-                    //bm.Properties["email"] = email;
-                    //bm.Properties["password"] = password;
-                    //qc.Send(bm);
-
                 }
                 else
-                {  
+                {
                     Trace.WriteLine("The fag was not found.");
                     Console.WriteLine("FAGGITY");
                     return null;
@@ -112,10 +105,10 @@ namespace LoginWorker
             {
                 Trace.WriteLine(ex);
                 Console.WriteLine(ex);
-             
+
             }
             return null;
-            
+
         }
 
         private async Task<Person> RunAsync(CancellationToken cancellationToken)
@@ -129,17 +122,13 @@ namespace LoginWorker
 
                 BrokeredMessage msg = qc.Receive();
 
-                //QueueClient qcDelete = QueueClient.CreateFromConnectionString(connectionString, qnameDelete);
-                //BrokeredMessage msgDelete = qc.Receive();
-
                 if (msg != null)
                 {
                     try
                     {
                         Trace.WriteLine("New login processed: " + msg.Properties["LoginEmail"] + msg.Properties["LoginPassword"]);
-                        msg.Complete();                   
-                        user = CheckStorage((string) msg.Properties["LoginEmail"], msg.Properties["LoginPassword"].ToString());
-                        Console.WriteLine();
+                        msg.Complete();
+                        user = CheckStorage((string)msg.Properties["LoginEmail"], msg.Properties["LoginPassword"].ToString());
 
                         if (user != null)
                         {
@@ -158,23 +147,11 @@ namespace LoginWorker
                     }
                     catch (Exception)
                     {
-                        msg.Abandon();  
+                        msg.Abandon();
                     }
                 }
-                //if (msgDelete != null)
-                //{
-                //    try
-                //    {
-                //        Trace.WriteLine("New delete is processed: " + msgDelete.Properties["email"] + msgDelete.Properties["password"]);
-                //        msgDelete.Complete();
-                //        DeleteFromStorageTest(msgDelete.Properties["email"].ToString());
-                //    }
-                //    catch (Exception)
-                //    {
-                //        msgDelete.Abandon();
-                //    }
                 return null;
-                //}
+
             }
         }
     }

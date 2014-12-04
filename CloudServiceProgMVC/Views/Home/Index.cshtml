@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    
+
 }
 <h2>Test</h2>
 @Html.ActionLink("Logga in", "Login")
@@ -16,49 +16,16 @@
 
 <div class="jumbotron">
     <h1>The front of backend</h1>
-    
-    
-    <input type="button" value="Create" onclick="location.href='@Url.Action("ShowDataFromTable", "Home")'" />
+
     <p class="lead">Här kommer du att få en inblick i det som sker bakom kulisserna:)</p>
     <h2>Registrera dig</h2>
     <form action="/Home/Registry" method="post">
-       <h4>Email</h4> @Html.TextBox("email")
-        <br/>
-       <h4>Password</h4> @Html.TextBox("password")
-        <br/>
-        <br/>
+        <h4>Email</h4> @Html.TextBox("email")
+        <br />
+        <h4>Password</h4> @Html.TextBox("password")
+        <br />
+        <br />
         <input type="submit" value="Registrera" />
-
-        </form>
-
-    <button name="btnShowTable"></button>
-    @*@Html.ActionLink("Till loginsidan", "Login", "Home", null, new { @class = "navbar-brand" })*@
-
-
-
-
-@*<p><a href="Registry.cshtml" class="btn btn-primary btn-large">Learn more &raquo;</a></p>*@
+    </form>
 
 </div>
-
-@*<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>*@

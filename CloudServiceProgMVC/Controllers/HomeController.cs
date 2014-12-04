@@ -28,7 +28,6 @@ namespace CloudServiceProgMVC.Controllers
 
         public ActionResult Index()
         {
-
             return View();
         }
 
@@ -38,13 +37,13 @@ namespace CloudServiceProgMVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult LoginTestResult()
+        public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult LoginTestResult(string LoginEmail, string LoginPassword)
+        public ActionResult Login(string LoginEmail, string LoginPassword)
         {
             string tableName = "Registrerade";
             // Retrieve the storage account from the connection string.
@@ -65,9 +64,12 @@ namespace CloudServiceProgMVC.Controllers
 
             Person person = (Person)retrievedResult.Result;
             // Print the phone number of the result.
-            if (person.Email == LoginEmail && person.Password == LoginPassword)
+            if (person != null)
             {
-                return RedirectToAction("LoggedIn");
+                if (person.Email == LoginEmail && person.Password == LoginPassword)
+                {
+                    return RedirectToAction("Registry");
+                }
             }
             else
                 Console.WriteLine("You are not registred.");
@@ -78,68 +80,6 @@ namespace CloudServiceProgMVC.Controllers
         public ActionResult LoggedIn()
         {
             return View();
-        }
-
-        //[HttpGet]
-        //public ActionResult Login()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Login(string LoginEmail, string LoginPassword)
-        //{
-        //    var nmLogin = NamespaceManager.CreateFromConnectionString(connectionString);
-        //    QueueDescription qdLogin = new QueueDescription(qnameLogin);
-        //    //Ställ in Max size på queue på  2GB
-        //    qdLogin.MaxSizeInMegabytes = 2048;
-        //    //Max Time To Live är 5 minuter  
-        //    qdLogin.DefaultMessageTimeToLive = new TimeSpan(0, 5, 0);
-
-        //    if (!nmLogin.QueueExists(qnameLogin))
-        //    {
-        //        nmLogin.CreateQueue(qdLogin);
-        //    }
-        //    QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
-
-        //    //Skapa msg med email properaty och skicka till QueueClient
-        //    var bm = new BrokeredMessage();
-        //    bm.Properties["LoginEmail"] = LoginEmail;
-        //    bm.Properties["LoginPassword"] = LoginPassword;
-        //    qc.Send(bm);
-
-        //    //user = email;
-        //    //userPassword = password;
-        //    //UserAndPassword = user + " pw: " + userPassword;
-        //    //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
-
-        //    return RedirectToAction("MainPageLogged");
-        //}
-
-        public ActionResult MainPageLogged()
-        {
-            QueueClient qc = QueueClient.CreateFromConnectionString(connectionString, qnameLogin);
-
-            BrokeredMessage msg = qc.Receive();
-
-
-            try
-            {
-                if (msg != null)
-                {
-                    if ((bool)msg.Properties["Validated"])
-                    {
-                        ViewBag.testBoolean = msg.Properties["user"];
-                        return View();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                return RedirectToAction("Login");
-            }
-            return RedirectToAction("Login");
         }
 
         [HttpPost]
@@ -166,18 +106,6 @@ namespace CloudServiceProgMVC.Controllers
             bm.Properties["password"] = password;
             qc.Send(bm);
 
-            //user = email;
-            //userPassword = password;
-            //UserAndPassword = user + " pw: " + userPassword;
-            //ViewBag.testaallskit = bm.Properties.Take(3).Select(c=>c.Value); 
-
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult ShowDataFromTable()
-        {
-
             return View();
         }
 
@@ -186,33 +114,11 @@ namespace CloudServiceProgMVC.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public ActionResult RegistryDisplay()
-        //{
-
-        //    return View();
-        //}
-        public ActionResult WhatHappened()
-        {
-            ViewBag.email = user;
-            ViewBag.userAndPassword = UserAndPassword;
-            var bm = new BrokeredMessage();
-            var userTest = bm.Properties.GetType().GetProperties();
-            ViewBag.test = userTest;
-
-            return View();
-        }
 
         public ActionResult Sample()
         {
             return View();
         }
-
-        //public ActionResult SignUp()
-        //{
-        //    //ViewBag.Message = "Newsletter Signups";
-        //    ret
-        //}
 
         public ActionResult About()
         {
@@ -232,10 +138,5 @@ namespace CloudServiceProgMVC.Controllers
         {
             return View();
         }
-
-        //public ActionResult Kaos()
-        //{
-        //    return View();
-        //}
     }
 }

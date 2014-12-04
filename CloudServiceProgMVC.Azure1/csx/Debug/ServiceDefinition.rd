@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CloudServiceProgMVC.Azure1" generation="1" functional="0" release="0" Id="2740e007-182e-404f-a6d8-5a23babe19c5" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CloudServiceProgMVC.Azure1" generation="1" functional="0" release="0" Id="d94c6d1e-6f92-4fbc-8936-6e6348a6ac1e" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="CloudServiceProgMVC.Azure1Group" generation="1" functional="0" release="0">
       <componentports>
@@ -112,7 +112,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="CloudServiceProgMVC" generation="1" functional="0" release="0" software="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\csx\Debug\roles\CloudServiceProgMVC" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="-1" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+          <role name="CloudServiceProgMVC" generation="1" functional="0" release="0" software="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\csx\Debug\roles\CloudServiceProgMVC" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="-1" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Endpoint1" protocol="http" portRanges="80" />
             </componentports>
@@ -133,7 +133,7 @@
           </sCSPolicy>
         </groupHascomponents>
         <groupHascomponents>
-          <role name="LoginWorker" generation="1" functional="0" release="0" software="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\csx\Debug\roles\LoginWorker" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="-1" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="LoginWorker" generation="1" functional="0" release="0" software="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\csx\Debug\roles\LoginWorker" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="-1" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <settings>
               <aCS name="Microsoft.ServiceBus.ConnectionString" defaultValue="" />
               <aCS name="TableStorageConnection" defaultValue="" />
@@ -151,7 +151,7 @@
           </sCSPolicy>
         </groupHascomponents>
         <groupHascomponents>
-          <role name="SignupsWorker1" generation="1" functional="0" release="0" software="C:\Users\Isak\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\csx\Debug\roles\SignupsWorker1" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="-1" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="SignupsWorker1" generation="1" functional="0" release="0" software="C:\Users\Christian Cordts\Documents\GitHub\CloudServiceProgMVC\CloudServiceProgMVC.Azure1\csx\Debug\roles\SignupsWorker1" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="-1" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <settings>
               <aCS name="Microsoft.ServiceBus.ConnectionString" defaultValue="" />
               <aCS name="TableStorageConnection" defaultValue="" />
@@ -183,9 +183,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="0982d0dd-e2af-41ab-8adc-7ef26f2882fb" ref="Microsoft.RedDog.Contract\ServiceContract\CloudServiceProgMVC.Azure1Contract@ServiceDefinition">
+    <implementation Id="fc2b32cf-292e-4479-99a4-80b5d4fdc81b" ref="Microsoft.RedDog.Contract\ServiceContract\CloudServiceProgMVC.Azure1Contract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="38a80725-2f16-4f57-93a8-a0768f34825d" ref="Microsoft.RedDog.Contract\Interface\CloudServiceProgMVC:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="4663a2c3-616e-40e4-9202-59482dfa2434" ref="Microsoft.RedDog.Contract\Interface\CloudServiceProgMVC:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/CloudServiceProgMVC.Azure1/CloudServiceProgMVC.Azure1Group/CloudServiceProgMVC:Endpoint1" />
           </inPort>
